@@ -153,11 +153,11 @@ namespace TicTacToeGame
                         else // inteligentni algoritem**************************************************
                         {
 
-                            if(StevecRund>=6)
+                            if (StevecRund >= 6)
                             {
                                 if (IgralneVrednosti[1, 1] == 'O' && IgralneVrednosti[1, 0] == 'O' && IgralneVrednosti[1, 2] == '\0')
                                 {
-                                    x =1; y = 2;
+                                    x = 1; y = 2;
                                     IgralneVrednosti[x, y] = 'X';
                                     IgralnaPlosca(IgralneVrednosti);
                                     if (Zmagovalec(IgralneVrednosti) == true)
@@ -340,7 +340,7 @@ namespace TicTacToeGame
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
-                                else if (IgralneVrednosti[2, 1] == 'O' && IgralneVrednosti[0,1]=='\0')
+                                else if (IgralneVrednosti[2, 1] == 'O' && IgralneVrednosti[0, 1] == '\0')
                                 {
                                     x = 0; y = 1;
                                     IgralneVrednosti[x, y] = 'X';
@@ -395,7 +395,256 @@ namespace TicTacToeGame
                             }
 
 
-                            
+                            if (StevecRund==3 || StevecRund == 5 || StevecRund==7)
+                            {
+                                if(IgralneVrednosti[0, 2] == 'O' && IgralneVrednosti[1, 2] == 'O' && IgralneVrednosti[2, 2] == '\0')
+                                {
+                                    x = 2; y = 2;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[1, 2] == 'O' && IgralneVrednosti[2, 2] == 'O' && IgralneVrednosti[0, 2] == '\0')
+                                {
+                                    x = 0; y = 2;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[2, 2] == 'O' && IgralneVrednosti[2, 1] == 'O' && IgralneVrednosti[2, 0] == '\0')
+                                {
+                                    x = 2; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[2, 0] == 'O' && IgralneVrednosti[2, 1] == 'O' && IgralneVrednosti[2, 2] == '\0')
+                                {
+                                    x = 2; y = 2;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[2, 0] == 'O' && IgralneVrednosti[1, 1] == 'O' && IgralneVrednosti[0, 2] == '\0')
+                                {
+                                    x = 0; y = 2;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[0, 2] == 'O' && IgralneVrednosti[1, 1] == 'O' && IgralneVrednosti[2, 0] == '\0')
+                                {
+                                    x = 2; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[0, 0] == 'O' && IgralneVrednosti[0, 1] == 'O' && IgralneVrednosti[0, 2] == '\0')
+                                {
+                                    x = 0; y = 2;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[0, 1] == 'O' && IgralneVrednosti[0, 2] == 'O' && IgralneVrednosti[0, 0] == '\0')
+                                {
+                                    x = 0; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[0, 0] == 'O' && IgralneVrednosti[1, 0] == 'O' && IgralneVrednosti[2, 0] == '\0')
+                                {
+                                    x = 2; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[2, 0] == 'O' && IgralneVrednosti[1, 0] == 'O' && IgralneVrednosti[0, 0] == '\0')
+                                {
+                                    x = 0; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[1, 1] == 'O' && IgralneVrednosti[1, 2] == 'O' && IgralneVrednosti[1, 0] == '\0')
+                                {
+                                    x = 1; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[1, 0] == 'O' && IgralneVrednosti[1, 1] == 'O' && IgralneVrednosti[1, 2] == '\0')
+                                {
+                                    x = 1; y = 2;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[0, 0] == 'O' && IgralneVrednosti[0, 2] == 'O' && IgralneVrednosti[0, 1] == '\0')
+                                {
+                                    x = 0; y = 1;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[0, 2] == 'O' && IgralneVrednosti[2, 2] == 'O' && IgralneVrednosti[1, 2] == '\0')
+                                {
+                                    x = 1; y = 2;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[2, 2] == 'O' && IgralneVrednosti[2, 0] == 'O' && IgralneVrednosti[2, 1] == '\0')
+                                {
+                                    x = 2; y = 1;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else if (IgralneVrednosti[0, 0] == 'O' && IgralneVrednosti[2, 0] == 'O' && IgralneVrednosti[1, 0] == '\0')
+                                {
+                                    x = 1; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }
+                                    //Racun(2, 2);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else
+                                {
+                                    x = Nakljicni(0, 3);
+                                    y = Nakljicni(0, 3);
+                                    //preveri 
+                                    if (PreveriZasedenost(IgralneVrednosti, x, y) == true) // JE zasedeno, in računalnik bo ponovno izbiral
+                                    {
+                                        //NaslednjaPoteza = 0;
+                                        //Console.WriteLine("Polje je že zasedeno");
+                                    }
+                                    else
+                                    {
+                                        IgralneVrednosti[x, y] = 'X';
+                                        IgralnaPlosca(IgralneVrednosti);
+                                        if (Zmagovalec(IgralneVrednosti) == true)
+                                        {
+                                            Console.WriteLine("Zmagovalec je računalnik!");
+                                            break;
+                                        }
+                                        StevecRund = StevecRund + 1;
+                                        NaslednjaPoteza = 1;
+                                    }
+                                }
+                            }
 
                             if (StevecRund == 2)
                             {
@@ -430,10 +679,40 @@ namespace TicTacToeGame
                                 }
                             }
 
-                            
+                            if (StevecRund == 1)
+                            {
+                                if (IgralneVrednosti[1, 1] == '\0')
+                                {
+                                    x = 1; y = 1;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    /*if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }*/
+                                    //Racun(1, 1);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                                else
+                                {
+                                    x = 0; y = 0;
+                                    IgralneVrednosti[x, y] = 'X';
+                                    IgralnaPlosca(IgralneVrednosti);
+                                    /*if (Zmagovalec(IgralneVrednosti) == true)
+                                    {
+                                        Console.WriteLine("Zmagovalec je računalnik!");
+                                        break;
+                                    }*/
+                                    //Racun(0, 0);
+                                    StevecRund = StevecRund + 1;
+                                    NaslednjaPoteza = 1;
+                                }
+                            }
 
                             if (StevecRund == 0)
-                            { 
+                            {
                                 x = 2; y = 0;
                                 IgralneVrednosti[x, y] = 'X';
                                 IgralnaPlosca(IgralneVrednosti);
@@ -447,7 +726,7 @@ namespace TicTacToeGame
                                 NaslednjaPoteza = 1;
                             }
 
-                            
+
 
                         }
 
@@ -514,4 +793,4 @@ namespace TicTacToeGame
             Console.ReadKey();
         }
     }
-)
+}
