@@ -7,27 +7,17 @@ using System.Threading.Tasks;
 namespace TicTacToeGame
 {
     class Program
-    {/*
-        static void Racun(int a, int b)
-        {
-            char[,] zu = new char[3, 3];
-            zu[a, b] = 'X';
-            IgralnaPlosca(zu);
-        }*/
-
-        static bool Zmagovalec(char[,] polje)
+    {
+        static bool Zmagovalec(char[,] polje) // Preveri ali je vodoravno / navpično / diagonalno trije x ali o
         {
             if (polje[0, 0] == 'X' && polje[0, 1] == 'X' && polje[0, 2] == 'X' || polje[1, 0] == 'X' && polje[1, 1] == 'X' && polje[1, 2] == 'X' || polje[2, 0] == 'X' && polje[2, 1] == 'X' && polje[2, 2] == 'X' || polje[0, 0] == 'X' && polje[1, 0] == 'X' && polje[2, 0] == 'X' || polje[0, 1] == 'X' && polje[1, 1] == 'X' && polje[2, 1] == 'X' || polje[0, 2] == 'X' && polje[1, 2] == 'X' && polje[2, 2] == 'X' || polje[0, 0] == 'X' && polje[1, 1] == 'X' && polje[2, 2] == 'X' || polje[0, 2] == 'X' && polje[1, 1] == 'X' && polje[2, 0] == 'X' || polje[0, 0] == 'O' && polje[0, 1] == 'O' && polje[0, 2] == 'O' || polje[1, 0] == 'O' && polje[1, 1] == 'O' && polje[1, 2] == 'O' || polje[2, 0] == 'O' && polje[2, 1] == 'O' && polje[2, 2] == 'O' || polje[0, 0] == 'O' && polje[1, 0] == 'O' && polje[2, 0] == 'O' || polje[0, 1] == 'O' && polje[1, 1] == 'O' && polje[2, 1] == 'O' || polje[0, 2] == 'O' && polje[1, 2] == 'O' && polje[2, 2] == 'O' || polje[0, 0] == 'O' && polje[1, 1] == 'O' && polje[2, 2] == 'O' || polje[0, 2] == 'O' && polje[1, 1] == 'O' && polje[2, 0] == 'O')
             {
                 return true;
             }
-
-
             return false;
         }
 
-
-        static bool PreveriZasedenost(char[,] polje, int l, int d)
+        static bool PreveriZasedenost(char[,] polje, int l, int d) // preveri ali je na izbranem mestu že vpisana x ali o ali pa je prazno
         {
             if (polje[l, d] == '\0')
             {
@@ -37,11 +27,9 @@ namespace TicTacToeGame
             {
                 return true;
             }
-
         }
 
-
-        static void IgralnaPlosca(char[,] polje)
+        static void IgralnaPlosca(char[,] polje) // Izriše koordinatni sistem z vsemi vrednostmi
         {
             char[,] arr = polje;
             Console.WriteLine();
@@ -65,7 +53,7 @@ namespace TicTacToeGame
             Console.WriteLine();
         }
 
-        static int Nakljicni(int Od, int Do)
+        static int Nakljicni(int Od, int Do) // Določi naključne vrednosti odvisno od pogoja 
         {
             Random rand = new Random();
             return rand.Next(Od, Do);
@@ -74,43 +62,41 @@ namespace TicTacToeGame
         static void Main(string[] args)
         {
 
-            char[,] IgralneVrednosti = new char[3, 3];
+            char[,] IgralneVrednosti = new char[3, 3]; // Vrednosti X in O v koordinatnem sistemu
+            bool Igra = true; // ali trenutno poteka igra 
+            char NovaIgra = 'Y'; // ali želite igrati
+            string Zahtevnost = null; 
 
-            //IgralnaPlosca(IgralneVrednosti);
-            bool Igra = true;
-            char NovaIgra = 'Y';
+            int x = -1; // koordinate po x osi
+            int y = -1; // koordinate po y osi
+            int StevecRund = 0; // šteje koliko rund ene igre se je odigralo in kdo je na potezi
 
-            int x = -1;
-            int y = -1;
-
-            int StevecRund = 0;
-            //int NovaIgra = -1;
-
-
-            int NaslednjaPoteza = Nakljicni(0, 2);
-            //Console.WriteLine("NAKLJČNO : " + NaslednjaPoteza);
-
-
-            string Zahtevnost = null;
-
+            int NaslednjaPoteza = Nakljicni(0, 2); // Naključna izbira kdo bo začel igro ( 0 - računalnik ..... 1 - človek  )
+            
+            // do while zanka ker se bo vsaj ekrat oddigrala igra.
             do
             {
                 Console.WriteLine("Tic-Tuc-toe" + '\n');
-                //ponastavitev vrednosti v igralnem polju
-                for (int i = 0; i < 3; i = i + 1)
+
+                //ponastavitev vrednosti v igralnem polju (izbriše x in o iz polja) 
+                //prva zanka skozi x koordinate druga skozi y kooridnate
+                for (int i = 0; i < 3; i = i + 1) 
                 {
                     for (int j = 0; j < 3; j = j + 1)
                     {
                         IgralneVrednosti[i, j] = '\0';
                     }
                 }
-                StevecRund = 0;
+                StevecRund = 0; 
 
+                // Zanka se ponavlja doker ni vpisano pravilna vrednos (stopnja zahtevnosti)
                 for (bool z = false; z == false; )
                 {
                     Console.WriteLine("Izberite zahtevnost:  Lahka     .......   Inteligentna  ");
-                    Zahtevnost = Console.ReadLine();
-                    if (Zahtevnost == "Lahka" || Zahtevnost == "I")
+                    Zahtevnost = Console.ReadLine();//branje zahtevnosti
+
+                    // če je zahtevnost pravilna se zanka konča in program se nadaljuje, drugače zahteva ponovni vpis
+                    if (Zahtevnost == "Lahka" || Zahtevnost == "Inteligentna")
                     {
                         break;
                     }
@@ -120,54 +106,52 @@ namespace TicTacToeGame
                     }
                 }
 
-
                 for (; Igra == true; ) // ena igra
                 {
-
                     if (NaslednjaPoteza == 0)//začne računalnik
                     {
-                        if (Zahtevnost == "Lahka")
+                        //Če je bila izbrana lahak zahtevnost
+                        if (Zahtevnost == "Lahka") 
                         {
+                            // z naključno funkcijo izbere x in y koordinato ( med 0 in 2 )
                             x = Nakljicni(0, 3);
                             y = Nakljicni(0, 3);
-                            //preveri 
-                            if (PreveriZasedenost(IgralneVrednosti, x, y) == true) // JE zasedeno, in računalnik bo ponovno izbiral
+
+                            //preveri ali so izbrane kooridnate proste ali zasedene ( drugače bo ponovno izbiral)
+                            if (PreveriZasedenost(IgralneVrednosti, x, y) == true) 
                             {
-                                //NaslednjaPoteza = 0;
-                                //Console.WriteLine("Polje je že zasedeno");
                             }
                             else
                             {
-                                IgralneVrednosti[x, y] = 'X';
-                                IgralnaPlosca(IgralneVrednosti);
-                                if (Zmagovalec(IgralneVrednosti) == true)
+                                IgralneVrednosti[x, y] = 'X'; // v kooridnate vpiše X (računalnik vedno X)
+                                IgralnaPlosca(IgralneVrednosti); // kliče funkcijo za izris igralne plošče
+                                if (Zmagovalec(IgralneVrednosti) == true) // pregleda ali prišlo do zmagovalca
                                 {
                                     Console.WriteLine("Zmagovalec je računalnik!");
-                                    break;
+                                    break; // Prekine trenutno igro
                                 }
-                                StevecRund = StevecRund + 1;
-                                NaslednjaPoteza = 1;
+                                StevecRund = StevecRund + 1; // Poveča rundo za ena
+                                NaslednjaPoteza = 1; // Nastavi človeka za naslednjo potezo.
                             }
-
                         }
-                        else // inteligentni algoritem**************************************************
+                        else //  INTELIGENTA ZAHTEVNOS 
                         {
-
+                            // kadar gre za 6 rundo ali več  ( pregled kombinacij glede na postavitec x in o po kooridantem sistemu)
                             if (StevecRund >= 6)
                             {
+                                // pregleda možne kombinajcije 
                                 if (IgralneVrednosti[1, 1] == 'O' && IgralneVrednosti[1, 0] == 'O' && IgralneVrednosti[1, 2] == '\0')
                                 {
-                                    x = 1; y = 2;
-                                    IgralneVrednosti[x, y] = 'X';
-                                    IgralnaPlosca(IgralneVrednosti);
-                                    if (Zmagovalec(IgralneVrednosti) == true)
+                                    x = 1; y = 2; // nastavitev vrednosti koordinatam
+                                    IgralneVrednosti[x, y] = 'X'; // shranitev koordinat
+                                    IgralnaPlosca(IgralneVrednosti); // izris igralne plošče 
+                                    if (Zmagovalec(IgralneVrednosti) == true) // preverjanje zmagovalca 
                                     {
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
-                                    StevecRund = StevecRund + 1;
-                                    NaslednjaPoteza = 1;
+                                    StevecRund = StevecRund + 1; // povečava rund
+                                    NaslednjaPoteza = 1; // nastavitev človeka na naslednjo potezo
                                 }
                                 else if (IgralneVrednosti[1, 1] == 'O' && IgralneVrednosti[1, 2] == 'O' && IgralneVrednosti[1, 0] == '\0')
                                 {
@@ -179,7 +163,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -193,7 +176,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -207,7 +189,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -221,7 +202,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -235,7 +215,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -249,7 +228,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -263,19 +241,16 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
-                                else
+                                else // računalnik bo izbral naključno vrednost
                                 {
                                     x = Nakljicni(0, 3);
                                     y = Nakljicni(0, 3);
                                     //preveri 
                                     if (PreveriZasedenost(IgralneVrednosti, x, y) == true) // JE zasedeno, in računalnik bo ponovno izbiral
                                     {
-                                        //NaslednjaPoteza = 0;
-                                        //Console.WriteLine("Polje je že zasedeno");
                                     }
                                     else
                                     {
@@ -291,11 +266,7 @@ namespace TicTacToeGame
                                     }
                                 }
                             }
-
-
-
-
-
+                            // 4. runda igre 
                             if (StevecRund == 4)
                             {
                                 if (IgralneVrednosti[2, 2] == 'X' && IgralneVrednosti[2, 1] == '\0')
@@ -308,7 +279,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 1);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -322,7 +292,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(1, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -336,7 +305,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(1, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -350,7 +318,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(1, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -364,7 +331,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(1, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -375,8 +341,6 @@ namespace TicTacToeGame
                                     //preveri 
                                     if (PreveriZasedenost(IgralneVrednosti, x, y) == true) // JE zasedeno, in računalnik bo ponovno izbiral
                                     {
-                                        //NaslednjaPoteza = 0;
-                                        //Console.WriteLine("Polje je že zasedeno");
                                     }
                                     else
                                     {
@@ -391,10 +355,9 @@ namespace TicTacToeGame
                                         NaslednjaPoteza = 1;
                                     }
                                 }
-
                             }
 
-
+                            // 3 ali 5 ali 7 runda
                             if (StevecRund==3 || StevecRund == 5 || StevecRund==7)
                             {
                                 if(IgralneVrednosti[0, 2] == 'O' && IgralneVrednosti[1, 2] == 'O' && IgralneVrednosti[2, 2] == '\0')
@@ -407,7 +370,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -421,7 +383,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -435,7 +396,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -449,7 +409,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -463,7 +422,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -477,7 +435,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -491,7 +448,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -505,7 +461,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -519,7 +474,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -533,7 +487,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -547,7 +500,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -561,7 +513,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -575,7 +526,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -589,7 +539,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -603,7 +552,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -617,7 +565,6 @@ namespace TicTacToeGame
                                         Console.WriteLine("Zmagovalec je računalnik!");
                                         break;
                                     }
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -628,8 +575,6 @@ namespace TicTacToeGame
                                     //preveri 
                                     if (PreveriZasedenost(IgralneVrednosti, x, y) == true) // JE zasedeno, in računalnik bo ponovno izbiral
                                     {
-                                        //NaslednjaPoteza = 0;
-                                        //Console.WriteLine("Polje je že zasedeno");
                                     }
                                     else
                                     {
@@ -653,27 +598,14 @@ namespace TicTacToeGame
                                     x = 2; y = 2;
                                     IgralneVrednosti[x, y] = 'X';
                                     IgralnaPlosca(IgralneVrednosti);
-                                    /*if (Zmagovalec(IgralneVrednosti) == true)
-                                    {
-                                        Console.WriteLine("Zmagovalec je računalnik!");
-                                        break;
-                                    }*/
-                                    //Racun(2, 2);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
-
                                 }
                                 else
                                 {
                                     x = 0; y = 0;
                                     IgralneVrednosti[x, y] = 'X';
-                                    IgralnaPlosca(IgralneVrednosti);
-                                    /*if (Zmagovalec(IgralneVrednosti) == true)
-                                    {
-                                        Console.WriteLine("Zmagovalec je računalnik!");
-                                        break;
-                                    }*/
-                                    //Racun(0, 0);
+                                    IgralnaPlosca(IgralneVrednosti);;
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -686,12 +618,6 @@ namespace TicTacToeGame
                                     x = 1; y = 1;
                                     IgralneVrednosti[x, y] = 'X';
                                     IgralnaPlosca(IgralneVrednosti);
-                                    /*if (Zmagovalec(IgralneVrednosti) == true)
-                                    {
-                                        Console.WriteLine("Zmagovalec je računalnik!");
-                                        break;
-                                    }*/
-                                    //Racun(1, 1);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
@@ -700,68 +626,49 @@ namespace TicTacToeGame
                                     x = 0; y = 0;
                                     IgralneVrednosti[x, y] = 'X';
                                     IgralnaPlosca(IgralneVrednosti);
-                                    /*if (Zmagovalec(IgralneVrednosti) == true)
-                                    {
-                                        Console.WriteLine("Zmagovalec je računalnik!");
-                                        break;
-                                    }*/
-                                    //Racun(0, 0);
                                     StevecRund = StevecRund + 1;
                                     NaslednjaPoteza = 1;
                                 }
                             }
-
+                            // kadar računalnik začne prvi
                             if (StevecRund == 0)
                             {
                                 x = 2; y = 0;
                                 IgralneVrednosti[x, y] = 'X';
                                 IgralnaPlosca(IgralneVrednosti);
-                                /*if (Zmagovalec(IgralneVrednosti) == true)
-                                {
-                                    Console.WriteLine("Zmagovalec je računalnik!");
-                                    break;
-                                }*/
-                                //Racun(2, 0);
                                 StevecRund = StevecRund + 1;
                                 NaslednjaPoteza = 1;
                             }
-
-
-
                         }
-
                     }
                     else  // OSEBA
                     {
+                        // Vnos koordinat človeka
                         Console.WriteLine("Prosim vnesite koordinate:");
                         Console.Write("x: ");
                         x = int.Parse(Console.ReadLine());
                         Console.Write("y: ");
                         y = int.Parse(Console.ReadLine());
 
-
+                        // Če so vnešene vrednosti med 0 in 2
                         if (x >= 0 && x < 3 && y >= 0 && y < 3)
                         {
-                            bool nekaj = PreveriZasedenost(IgralneVrednosti, x, y);
-                            //Console.WriteLine("NEKAJ: " + nekaj);
-
-                            //preveri ali je zasedeno 
+                            bool nekaj = PreveriZasedenost(IgralneVrednosti, x, y); // preveri ali so vnešene koordinate zasedene ali je mesto prosto
                             if (nekaj == true)  // je zasedeno, in oseba bo ponovno izbiral
                             {
-                                //NaslednjaPoteza = 1;
                                 Console.WriteLine("Polje je že zasedeno");
                             }
                             else
                             {
-                                IgralneVrednosti[x, y] = 'O';
-                                IgralnaPlosca(IgralneVrednosti);
-                                if (Zmagovalec(IgralneVrednosti) == true)
+                                IgralneVrednosti[x, y] = 'O'; // vnos O v koordinate
+                                IgralnaPlosca(IgralneVrednosti); // izris igralne plošče
+                                if (Zmagovalec(IgralneVrednosti) == true) // preverjanje zmagovalca
                                 {
                                     Console.WriteLine("Vi ste zmagovalec!");
-                                    break;
+                                    break; // končanje igre
                                 }
-                                StevecRund = StevecRund + 1;
-                                NaslednjaPoteza = 0;
+                                StevecRund = StevecRund + 1; // povečava rund 
+                                NaslednjaPoteza = 0; // postavitev računalnika za naslednjo runfo
                             }
                         }
                         else
@@ -770,25 +677,30 @@ namespace TicTacToeGame
                         }
                     }
 
-
-
-
+                    // Preveri ali je bilo oddigranih 9 rund in posledično ni več prostih mest ( neodločen izid )
                     if (StevecRund == 9)
                     {
                         Console.WriteLine("Neodločen izid!");
                         break;
                     }
                 }
-
-                Console.WriteLine("Želite še eno igro ? Y/N");
-
-                NovaIgra = char.Parse(Console.ReadLine());
-
-
-
-            } while (NovaIgra != 'N');
-
-
+                // Zanka ki se ponavlja dokler ne dobi pravilnega vnosa
+                for (bool zz = false; zz == false; )
+                {
+                    Console.WriteLine("Želite še eno igro ? Y/N");
+                    NovaIgra = char.Parse(Console.ReadLine()); // prebere ali želite novo igro
+                    //  če je vnos pravilen ( Y / N ) se zanka zaključi in glede na vnešen vnos se se program nadaljuje ali zaključi
+                    if (NovaIgra == 'Y' || NovaIgra == 'N') 
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Napačen vnos!! poskusi znova!!");
+                    }
+                }
+                
+            } while (NovaIgra != 'N'); // ALI STE želeli zaključit igro
 
             Console.ReadKey();
         }
