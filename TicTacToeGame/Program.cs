@@ -8,6 +8,32 @@ namespace TicTacToeGame
 {
     class Program
     {
+        static bool Zmagovalec(char[,] polje)
+        {
+            if (polje[0, 0] == 'X' && polje[0, 1] == 'X' && polje[0, 2] == 'X' || polje[1, 0] == 'X' && polje[1, 1] == 'X' && polje[1, 2] == 'X' || polje[2, 0] == 'X' && polje[2, 1] == 'X' && polje[2, 2] == 'X' || polje[0, 0] == 'X' && polje[1, 0] == 'X' && polje[2, 0] == 'X' || polje[0, 1] == 'X' && polje[1, 1] == 'X' && polje[2, 1] == 'X' || polje[0, 2] == 'X' && polje[1, 2] == 'X' && polje[2, 2] == 'X' || polje[0, 0] == 'X' && polje[1, 1] == 'X' && polje[2, 2] == 'X' || polje[0, 2] == 'X' && polje[1, 1] == 'X' && polje[2, 0] == 'X' || polje[0, 0] == 'O' && polje[0, 1] == 'O' && polje[0, 2] == 'O' || polje[1, 0] == 'O' && polje[1, 1] == 'O' && polje[1, 2] == 'O' || polje[2, 0] == 'O' && polje[2, 1] == 'O' && polje[2, 2] == 'O' || polje[0, 0] == 'O' && polje[1, 0] == 'O' && polje[2, 0] == 'O' || polje[0, 1] == 'O' && polje[1, 1] == 'O' && polje[2, 1] == 'O' || polje[0, 2] == 'O' && polje[1, 2] == 'O' && polje[2, 2] == 'O' || polje[0, 0] == 'O' && polje[1, 1] == 'O' && polje[2, 2] == 'O' || polje[0, 2] == 'O' && polje[1, 1] == 'O' && polje[2, 0] == 'O')
+            {
+                return true;
+            }
+
+
+            return false;
+        }
+
+
+        static bool PreveriZasedenost(char[,] polje, int l, int d)
+        {
+            if (polje[l, d] == '\0')
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+
         static void IgralnaPlosca(char[,] polje)
         {
             char[,] arr = polje;
